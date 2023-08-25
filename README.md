@@ -1,7 +1,8 @@
 ## WeaverBird: Empowering Financial Decision-Making with Large Language Model, Knowledge Base, and Search Engine
 
 
-<p align="center">📃 <a href="https://arxiv.org/abs/2308.05361" target="_blank">Paper</a> • 🌐 <a href="https://github.com/ant-research/fin_domain_llm/blob/main/README_zh.md" target="_blank">中文 README</a> • 📺 Demo <a href="https://www.youtube.com/watch?v=yofgeqnlrMc" target="_blank">[WeaverBird, version 0.0.1]</a> </p>
+<p align="center">📃 <a href="https://arxiv.org/abs/2308.05361" target="_blank">Paper</a> • 🌐 <a href="https://github.com/ant-research/fin_domain_llm/blob/main/README_zh.md" target="_blank">中文 README</a> 
+         
 
 WeaverBird is an intelligent dialogue system designed specifically for the finance domain. Our system harnesses a large language model of GPT architecture that has been tuned using extensive corpora of finance-related text.
 
