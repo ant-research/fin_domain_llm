@@ -1,10 +1,18 @@
 ## WeaverBird: Empowering Financial Decision-Making with Large Language Model, Knowledge Base, and Search Engine
 
+![Python 3.9+](https://img.shields.io/badge/python-3.9+-blue.svg)
+![](https://img.shields.io/badge/license-Apache-000000.svg)
+![PRs Welcome](https://img.shields.io/badge/PRs-Welcome-green) 
+![GitHub last commit](https://img.shields.io/github/last-commit/ant-research/fin_domain_llm)
+![Stars](https://img.shields.io/github/stars/ant-research/fin_domain_llm)
 
 <p align="center">📃 <a href="https://arxiv.org/abs/2308.05361" target="_blank">Paper</a> • 🌐 <a href="https://github.com/ant-research/fin_domain_llm/blob/main/README_zh.md" target="_blank">中文 README</a> 
          
 
 WeaverBird is an intelligent dialogue system designed specifically for the finance domain. Our system harnesses a large language model of GPT architecture that has been tuned using extensive corpora of finance-related text.
+
+
+** We are actively updating the repo and will finish within a few days  **
 
 <span id='top'/>
 
@@ -24,7 +32,7 @@ If you find `WeaverBird` useful for your research or development, please cite th
 ```
 @article{xue2023weaverbird,
          title={WeaverBird: Empowering Financial Decision-Making withLarge Language Model, Knowledge Base, and Search Engine},
-         author={Siqiao Xue and Fan Zhou and Yi Xu and Hongyu Zhao and Shuo Xie and Caigao Jiang and James Zhang and Peng Xu and Jun Zhou and Dacheng Xiu and Hongyuan Mei},
+         author={Siqiao Xue and Fan Zhou and Yi Xu and Hongyu Zhao and Shuo Xie and Caigao Jiang and James Zhang and Jun Zhou and Dacheng Xiu and Hongyuan Mei},
          year={2023},
          eprint={2308.05361},
          archivePrefix={arXiv},
