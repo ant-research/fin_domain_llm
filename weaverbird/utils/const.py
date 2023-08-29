@@ -23,3 +23,6 @@ class LogConst(ExplicitEnum):
                           ' - %(levelname)s: %(message)s'
 
 
+class Language(ExplicitEnum):
+    EN = 'en'
+    CN = 'cn'
