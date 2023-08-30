@@ -6,10 +6,10 @@ from dataclasses import dataclass, field
 @dataclass
 class BaseModelConfig:
     """
-    Arguments pertaining to which model/config/tokenizer we are going to fine-tune.
+    Arguments pertaining to which model/config/tokenizer.
     source: https://github.com/hiyouga/LLaMA-Efficient-Tuning
     """
-    model_name_or_path: str = field(
+    model_name_or_dir: str = field(
         metadata={"help": "Path to pretrained model or model identifier from huggingface.co/models."}
     )
     cache_dir: Optional[str] = field(

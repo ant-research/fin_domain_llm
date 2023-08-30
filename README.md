@@ -53,7 +53,7 @@ The following repositories are used in `WeaverBird`, either in close to original
 - [WebGLM](https://github.com/THUDM/WebGLM)
 - [EasyTPP](https://github.com/ant-research/EasyTemporalPointProcess)
 - [Huggingface - transformers](https://github.com/huggingface/transformers)
-
+- [LLaMA-Efficient-Tuning](https://github.com/hiyouga/LLaMA-Efficient-Tuning)
 
 ## Star History <a href='#top'>[Back to Top]</a>
 <span id='star-history'/>
