@@ -40,7 +40,7 @@ def load_model_and_tokenizer(
     }
 
     tokenizer = AutoTokenizer.from_pretrained(
-        Path(model_config.model_name_or_dir),
+        Path(model_config.model_name_or_path),
         use_fast=model_config.use_fast_tokenizer,
         padding_side=model_config.padding_side,
         **config_kwargs
@@ -49,7 +49,7 @@ def load_model_and_tokenizer(
     if finetuning_args is not None and finetuning_args.finetuning_type == "full" and model_config.checkpoint_dir is not None:
         model_to_load = model_config.checkpoint_dir[0]
     else:
-        model_to_load = model_config.model_name_or_dir
+        model_to_load = model_config.model_name_or_path
 
     config = AutoConfig.from_pretrained(model_to_load, **config_kwargs)
 
@@ -103,7 +103,7 @@ def load_model_and_tokenizer(
         logger.info("Quantizing model to {} bit.".format(model_config.quantization_bit))
 
     # Load and prepare pre-trained models (without valuehead).
-    if 'glm' in model_config.model_name_or_dir.lower():
+    if 'glm' in model_config.model_name_or_path.lower():
         model = AutoModel.from_pretrained(model_to_load, config=config, **config_kwargs)
     else:
         model = AutoModelForCausalLM.from_pretrained(

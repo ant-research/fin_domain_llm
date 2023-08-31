@@ -7,6 +7,9 @@ from transformers import HfArgumentParser
 
 from weaverbird.config_factory import BaseModelConfig, FinetuningConfig, GeneratingConfig
 
+if TYPE_CHECKING:
+    from transformers.modeling_utils import PreTrainedModel
+
 
 def count_parameters(model: torch.nn.Module) -> Tuple[int, int]:
     """
@@ -50,3 +53,67 @@ def _parse_args(parser: HfArgumentParser, args: Optional[Dict[str, Any]] = None)
         return parser.parse_json_file(os.path.abspath(sys.argv[1]))
     else:
         return parser.parse_args_into_dataclasses()
+
+
+def torch_gc() -> None:
+    """Collects GPU memory.
+    """
+    if torch.cuda.is_available():
+        torch.cuda.empty_cache()
+        torch.cuda.ipc_collect()
+
+
+def auto_configure_device_map(num_gpus: int) -> Dict[str, int]:
+    """Configures device map for ChatGLM2.
+
+    Source: https://github.com/hiyouga/ChatGLM-Efficient-Tuning
+    """
+    num_layers = 28
+    layers_per_gpu = 30 / num_gpus
+    device_map = {
+        "transformer.embedding.word_embeddings": 0,
+        "transformer.encoder.final_layernorm": 0,
+        "transformer.output_layer": 0,
+        "transformer.rotary_pos_emb": 0,
+        "transformer.prefix_encoder": 0,
+        "lm_head": 0
+    }
+
+    added_layers = 2
+    target_gpu = 0
+
+    for i in range(num_layers):
+        if added_layers >= layers_per_gpu:
+            target_gpu += 1
+            added_layers = 0
+        assert target_gpu < num_gpus
+        device_map[f"transformer.encoder.layers.{i}"] = target_gpu
+        added_layers += 1
+
+    return device_map
+
+
+def dispatch_model(model: PreTrainedModel) -> PreTrainedModel:
+    """Dispatches a pre-trained model to GPUs with balanced memory.
+
+    Source: https://github.com/hiyouga/LLaMA-Efficient-Tuning/blob/main/src/llmtuner/extras/misc.py
+    """
+    if torch.cuda.device_count() > 1:
+        from accelerate import dispatch_model
+
+        if 'chatglm' in model.name_or_path:
+            device_map = auto_configure_device_map(torch.cuda.device_count())
+        else:
+            from accelerate.utils import infer_auto_device_map, get_balanced_memory
+
+            if model._no_split_modules is None:
+                raise ValueError("The model class needs to implement the `_no_split_modules` attribute.")
+
+            kwargs = {"dtype": model.dtype, "no_split_module_classes": model._no_split_modules}
+            max_memory = get_balanced_memory(model, **kwargs)
+            device_map = infer_auto_device_map(model, max_memory=max_memory, **kwargs)
+
+        model.tie_weights()
+        return dispatch_model(model, device_map)
+    else:
+        return model.cuda()
