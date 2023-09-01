@@ -6,13 +6,13 @@
 ![GitHub last commit](https://img.shields.io/github/last-commit/ant-research/fin_domain_llm)
 ![Stars](https://img.shields.io/github/stars/ant-research/fin_domain_llm)
 
-<p align="center">📃 <a href="https://arxiv.org/abs/2308.05361" target="_blank">Paper</a> • 🌐 <a href="https://github.com/ant-research/fin_domain_llm/blob/main/README_zh.md" target="_blank">中文 README</a> 
+<p align="center">📃 <a href="https://arxiv.org/abs/2308.05361" target="_blank">Paper</a> • 🌐 <a href="https://github.com/ant-research/fin_domain_llm/blob/main/README_zh.md" target="_blank">中文 README</a> • 📺 <a href="https://www.youtube.com/watch?v=yofgeqnlrMc" target="_blank">[Demo, version 0.0.1]</a> </p>
          
 
 WeaverBird is an intelligent dialogue system designed specifically for the finance domain. Our system harnesses a large language model of GPT architecture that has been tuned using extensive corpora of finance-related text.
 
 
-** We are actively updating the repo and will finish within a few days  **
+**We are actively updating the repo and will finish within a few days**
 
 <span id='top'/>
 
