@@ -6,7 +6,7 @@ import torch
 
 
 class TrainedRetrieverEmbeddings(Embeddings):
-    """
+    """A trained neural model to generate embeddings
     """
 
     def __init__(self, model_path, device=None, max_batch_size=400):
