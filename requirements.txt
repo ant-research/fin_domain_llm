@@ -1,0 +1,7 @@
+torch>=1.13.1
+transformers>=4.29.1
+nltk
+pandas>=2.0.1
+numpy>=1.25.0
+sentence-transformers
+gradio>=3.38.3
