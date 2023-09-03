@@ -32,7 +32,7 @@ If you find `WeaverBird` useful for your research or development, please cite th
 ```
 @article{xue2023weaverbird,
          title={WeaverBird: Empowering Financial Decision-Making withLarge Language Model, Knowledge Base, and Search Engine},
-         author={Siqiao Xue and Fan Zhou and Yi Xu and Hongyu Zhao and Shuo Xie and QIngyang Dai and Caigao Jiang and James Zhang and Jun Zhou and Dacheng Xiu and Hongyuan Mei},
+         author={Siqiao Xue and Fan Zhou and Yi Xu and Hongyu Zhao and Shuo Xie and Qingyang Dai and Caigao Jiang and James Zhang and Jun Zhou and Dacheng Xiu and Hongyuan Mei},
          year={2023},
          eprint={2308.05361},
          archivePrefix={arXiv},
