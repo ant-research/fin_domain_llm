@@ -4,11 +4,11 @@ from typing import Tuple, Optional, Dict, Any
 
 import torch
 from transformers import HfArgumentParser
+from transformers.generation.logits_process import LogitsProcessor
+from transformers.generation.utils import LogitsProcessorList
+from transformers.modeling_utils import PreTrainedModel
 
 from weaverbird.config_factory import BaseModelConfig, FinetuningConfig, GeneratingConfig
-
-if TYPE_CHECKING:
-    from transformers.modeling_utils import PreTrainedModel
 
 
 def count_parameters(model: torch.nn.Module) -> Tuple[int, int]:
@@ -91,6 +91,23 @@ def auto_configure_device_map(num_gpus: int) -> Dict[str, int]:
         added_layers += 1
 
     return device_map
+
+
+# Avoid runtime error in model.generate(do_sample=True).
+# Borrowed from: https://huggingface.co/THUDM/chatglm-6b/blob/658202d88ac4bb782b99e99ac3adff58b4d0b813/modeling_chatglm.py#L54
+class InvalidScoreLogitsProcessor(LogitsProcessor):
+
+    def __call__(self, input_ids: torch.LongTensor, scores: torch.FloatTensor) -> torch.FloatTensor:
+        if torch.isnan(scores).any() or torch.isinf(scores).any():
+            scores.zero_()
+            scores[..., 5] = 5e4
+        return scores
+
+
+def get_logits_processor() -> LogitsProcessorList:
+    logits_processor = LogitsProcessorList()
+    logits_processor.append(InvalidScoreLogitsProcessor())
+    return logits_processor
 
 
 def dispatch_model(model: PreTrainedModel) -> PreTrainedModel:
