@@ -94,14 +94,12 @@ class Demo:
         container=False)
 
     cn_title = """
-    <div class="container">
-        <div class="text">
-            <h1 align="center" style="font-size: 3rem; color: #273746">织工鸟</h1>
-        </div>
-    </div>
+    <h1 align="center" style="font-size: 3rem; color: #273746">织工鸟</h1>
     """
 
-    cn_sub_title = """"""
+    cn_sub_title = """
+    <h4 align="center" style="font-size: 1rem; color: #CD5C5C">一个开源且轻量级的金融领域GPT</h4>
+    """
 
     cn_examples = [
         ['阿里巴巴的2023年Q1净利润多少?'],
@@ -180,6 +178,45 @@ class Demo:
                         self.en_input_text.submit(self.get_answer,
                                                   [self.en_input_text, chatbot, chat_history, select_kb, search_engine],
                                                   [chatbot, chat_history, self.en_input_text])
+
+            with gr.Tab('中文'):
+                gr.HTML(self.cn_title)
+                gr.HTML(self.cn_sub_title)
+                with gr.Tab('对话'):
+                    with gr.Row():
+                        with gr.Column(scale=1):
+                            search_engine = gr.Radio(["关", "开"], label="搜索引擎", value="开")
+                            kb_list = get_kbs_list(self.kb_root_dir)
+                            select_kb = gr.Dropdown(
+                                kb_list,
+                                label="知识库",
+                                interactive=True,
+                                value=kb_list[0] if len(kb_list) > 0 else None
+                            )
+                            with gr.Accordion("可以尝试问这些问题"):
+                                example_text = gr.Examples(examples=self.cn_examples,
+                                                           fn=self.set_example,
+                                                           inputs=self.cn_input_text,
+                                                           outputs=self.cn_input_text,
+                                                           label="参考问题")
+                        with gr.Column(scale=5):
+                            with gr.Row():
+                                chatbot = gr.Chatbot(elem_id="chat-box", show_label=False, height=500)
+                            with gr.Row():
+                                empty_btn = gr.Button("🗑️ ",
+                                                      elem_classes=['custom_height', 'custom_width', 'custom_btn_2'])
+                                self.cn_input_text.render()
+                                sub_btn = gr.Button("➡️",
+                                                    elem_classes=['custom_height', 'custom_width', 'custom_btn_2'])
+                        sub_btn.click(self.get_answer,
+                                      [self.cn_input_text, chatbot, chat_history, select_kb, search_engine],
+                                      [chatbot, chat_history, self.en_input_text])
+
+                        empty_btn.click(self.reset_history, outputs=[chatbot, chat_history], show_progress=True)
+
+                        self.cn_input_text.submit(self.get_answer,
+                                                  [self.cn_input_text, chatbot, chat_history, select_kb, search_engine],
+                                                  [chatbot, chat_history, self.cn_input_text])
 
         demo.queue(concurrency_count=50).launch(
             server_name='0.0.0.0',
