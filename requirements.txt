@@ -5,3 +5,4 @@ pandas>=2.0.1
 numpy>=1.25.0
 sentence-transformers
 gradio>=3.38.3
+langchain>=0.0.266
