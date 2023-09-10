@@ -5,12 +5,12 @@ from transformers import AutoTokenizer, AutoModel
 import torch
 
 
-class TrainedRetrieverEmbeddings(Embeddings):
-    """A trained neural model to generate embeddings
+class QueryRefEncoder(Embeddings):
+    """
     """
 
     def __init__(self, model_path, device=None, max_batch_size=400):
-        super(TrainedRetrieverEmbeddings, self).__init__()
+        super(QueryRefEncoder, self).__init__()
         self.tokenizer = AutoTokenizer.from_pretrained(model_path)
         self.query_encoder = AutoModel.from_pretrained(model_path + "/query_encoder")
         self.reference_encoder = AutoModel.from_pretrained(model_path + "/reference_encoder")
