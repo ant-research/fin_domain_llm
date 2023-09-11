@@ -1,9 +1,11 @@
 from typing import Any, Dict, Optional
 from dataclasses import asdict, dataclass, field
 
+from weaverbird.config_factory.base_config import BaseConfig
+
 
 @dataclass
-class GeneratingConfig:
+class GenerationConfig(BaseConfig):
     """
     Arguments pertaining to specify the decoding parameters.
     source: https://github.com/hiyouga/LLaMA-Efficient-Tuning
@@ -29,7 +31,7 @@ class GeneratingConfig:
         metadata={"help": "Number of beams for beam search. 1 means no beam search."}
     )
     max_length: Optional[int] = field(
-        default=None,
+        default=10000,
         metadata={"help": "The maximum length the generated tokens can have. It can be overridden by max_new_tokens."}
     )
     max_new_tokens: Optional[int] = field(

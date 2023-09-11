@@ -1,10 +1,11 @@
 import torch
 from typing import Literal, Optional
 from dataclasses import dataclass, field
+from weaverbird.config_factory.base_config import BaseConfig
 
 
 @dataclass
-class BaseModelConfig:
+class BaseModelConfig(BaseConfig):
     """
     Arguments pertaining to which model/config/tokenizer.
     source: https://github.com/hiyouga/LLaMA-Efficient-Tuning

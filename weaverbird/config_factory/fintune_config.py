@@ -2,9 +2,11 @@ import json
 from typing import Literal, Optional
 from dataclasses import asdict, dataclass, field
 
+from weaverbird.config_factory.base_config import BaseConfig
+
 
 @dataclass
-class FinetuningConfig:
+class FinetuningConfig(BaseConfig):
     """
     Arguments pertaining to which techniques we are going to fine-tuning with.
     source: https://github.com/hiyouga/LLaMA-Efficient-Tuning
