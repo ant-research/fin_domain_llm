@@ -5,10 +5,9 @@ from weaverbird.utils import parse_configs
 def main():
     model_config_dict = {'model_name_or_dir': 'chatglm2-6b'}
 
-    model_config, _, _ = parse_configs(model_config_dict)
+    configs = parse_configs(model_config_dict)
 
-    load_model_and_tokenizer(model_config)
-    # load_model_and_tokenizer(parse_configs(model_config))
+    load_model_and_tokenizer(configs['model_config'])
 
     return
 

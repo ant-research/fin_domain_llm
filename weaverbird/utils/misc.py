@@ -1,5 +1,6 @@
 import os
 import sys
+import time
 from typing import Tuple, Optional, Dict, Any
 
 import torch
@@ -8,7 +9,7 @@ from transformers.generation.logits_process import LogitsProcessor
 from transformers.generation.utils import LogitsProcessorList
 from transformers.modeling_utils import PreTrainedModel
 
-from weaverbird.config_factory import BaseModelConfig, FinetuningConfig, GeneratingConfig
+from weaverbird.config_factory import BaseModelConfig, FinetuningConfig, GenerationConfig, WebSearchConfig
 
 
 def count_parameters(model: torch.nn.Module) -> Tuple[int, int]:
@@ -38,10 +39,15 @@ def parse_configs(configs: Optional[Dict[str, Any]] = None):
     parser = HfArgumentParser((
         BaseModelConfig,
         FinetuningConfig,
-        GeneratingConfig
+        GenerationConfig,
+        WebSearchConfig
     ))
 
-    return _parse_args(parser, configs)
+    parsed_config =  _parse_args(parser, configs)
+    return {'basemodel_config': parsed_config[0],
+            'finetuning_config': parsed_config[1],
+            'generation_config': parsed_config[2],
+            'websearch_config': parsed_config[3]}
 
 
 def _parse_args(parser: HfArgumentParser, args: Optional[Dict[str, Any]] = None) -> Tuple[Any]:
@@ -91,6 +97,12 @@ def auto_configure_device_map(num_gpus: int) -> Dict[str, int]:
         added_layers += 1
 
     return device_map
+
+
+def get_current_time():
+    now = time.time()
+    time_arr = time.localtime(now)
+    return time.strftime("%Y-%m-%d", time_arr)
 
 
 # Avoid runtime error in model.generate(do_sample=True).
