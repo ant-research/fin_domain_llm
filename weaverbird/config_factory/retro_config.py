@@ -17,8 +17,11 @@ class WebSearchConfig(BaseConfig):
     )
 
     num_search_results: Optional[int] = field(
-        default=5,
+        default=10,
         metadata={"help": "Number of pages per search"}
     )
 
 
+@dataclass
+class KBConfig(BaseConfig):
+    pass

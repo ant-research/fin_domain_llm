@@ -7,13 +7,14 @@ import torch
 
 class QueryRefEncoder(Embeddings):
     """
+    Produce embeddings of query and references using a pretrained encoder
     """
 
-    def __init__(self, model_path, device=None, max_batch_size=400):
+    def __init__(self, model_dir, device=None, max_batch_size=400):
         super(QueryRefEncoder, self).__init__()
-        self.tokenizer = AutoTokenizer.from_pretrained(model_path)
-        self.query_encoder = AutoModel.from_pretrained(model_path + "/query_encoder")
-        self.reference_encoder = AutoModel.from_pretrained(model_path + "/reference_encoder")
+        self.tokenizer = AutoTokenizer.from_pretrained(model_dir)
+        self.query_encoder = AutoModel.from_pretrained(model_dir + "/query_encoder")
+        self.reference_encoder = AutoModel.from_pretrained(model_dir + "/reference_encoder")
         self.device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu") if not device else device
         self.query_encoder = self.query_encoder.to(self.device).eval()
         self.reference_encoder = self.reference_encoder.to(self.device).eval()

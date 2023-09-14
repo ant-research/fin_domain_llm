@@ -27,7 +27,7 @@ class WebSearcher(BaseRetriever):
 
     def _search_result2docs(self, search_results):
         docs = []
-        logger.info('# search_results', len(search_results))
+        logger.info(f'# search_results {len(search_results)}')
         for result in search_results:
             doc = Document(page_content=result["snippet"].replace('\n', '') if "snippet" in result.keys() else "",
                            metadata={"link": result["link"] if "link" in result.keys() else "",
@@ -70,9 +70,3 @@ class WebSearcher(BaseRetriever):
                 if query.endswith('"'):
                     query = query[:-1]
         return query.strip()
-
-    def search_tool(self, query: str, num_search_results: int = 5) -> List[dict]:
-        """Returns num_search_results pages per Google search."""
-        query_clean = self.clean_search_query(query)
-        result = self.search.results(query_clean, num_search_results)
-        return result
