@@ -44,7 +44,7 @@ def parse_configs(configs: Optional[Dict[str, Any]] = None):
     ))
 
     parsed_config =  _parse_args(parser, configs)
-    return {'basemodel_config': parsed_config[0],
+    return {'model_config': parsed_config[0],
             'finetuning_config': parsed_config[1],
             'generation_config': parsed_config[2],
             'websearch_config': parsed_config[3]}

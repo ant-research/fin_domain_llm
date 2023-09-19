@@ -8,9 +8,9 @@ from weaverbird.utils import parse_configs
 def main():
     model_config_dict = {'model_name_or_path': 'chatglm2-6b'}
 
-    model_config, _, generation_config = parse_configs(model_config_dict)
+    configs = parse_configs(model_config_dict)
 
-    chat_model = LLMChatModel(model_config, generation_config=generation_config)
+    chat_model = LLMChatModel(configs['model_config'], generation_config=configs['generation_config'])
 
     chat_prompt = CHAT_RETRO_EN_PROMPT
 
