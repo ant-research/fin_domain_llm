@@ -8,7 +8,8 @@ from weaverbird.models import load_model_and_tokenizer
 from weaverbird.utils import dispatch_model
 
 
-class LLMChatModel(LLM):
+class ChatGLM2(LLM):
+    """ GLM2 from THU  """
     model: Optional[PreTrainedModel] = None
 
     tokenizer: Optional[PreTrainedTokenizer] = None
@@ -21,7 +22,7 @@ class LLMChatModel(LLM):
             finetuning_config: Optional[FinetuningConfig] = None,
             generation_config: Optional[GenerationConfig] = None
     ) -> None:
-        super(LLMChatModel, self).__init__()
+        super(ChatGLM2, self).__init__()
         self.model, self.tokenizer = load_model_and_tokenizer(model_config, finetuning_config)
         self.model = dispatch_model(self.model)
         self.model = self.model.eval()  # enable evaluation mode
@@ -42,4 +43,4 @@ class LLMChatModel(LLM):
     @property
     def _llm_type(self) -> str:
         """Return type of llm."""
-        return "weaverbird_llm"
+        return "glm2"

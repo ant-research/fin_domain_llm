@@ -1,7 +1,7 @@
 from langchain import LLMChain
 
 from weaverbird.chains.chat_retro.prompt import CHAT_RETRO_EN_PROMPT
-from weaverbird.models import LLMChatModel
+from weaverbird.models import ChatGLM2
 from weaverbird.utils import parse_configs
 
 
@@ -10,7 +10,7 @@ def main():
 
     configs = parse_configs(model_config_dict)
 
-    chat_model = LLMChatModel(configs['model_config'], generation_config=configs['generation_config'])
+    chat_model = ChatGLM2(configs['model_config'], generation_config=configs['generation_config'])
 
     chat_prompt = CHAT_RETRO_EN_PROMPT
 
