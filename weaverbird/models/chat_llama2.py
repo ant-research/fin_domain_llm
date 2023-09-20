@@ -69,28 +69,28 @@ class ChatLlama2(LLM):
         max_length = input_kwargs.pop("max_length", None)
         max_new_tokens = input_kwargs.pop("max_new_tokens", None)
 
-        generation_configs = self.generation_config.dict()
-        generation_configs.update(dict(
-            do_sample=do_sample if do_sample is not None else generation_configs["do_sample"],
-            temperature=temperature or generation_configs["temperature"],
-            top_p=top_p or generation_configs["top_p"],
-            top_k=top_k or generation_configs["top_k"],
-            repetition_penalty=repetition_penalty or generation_configs["repetition_penalty"],
+        generation_config = self.generation_config.dict()
+        generation_config.update(dict(
+            do_sample=do_sample if do_sample is not None else generation_config["do_sample"],
+            temperature=temperature or generation_config["temperature"],
+            top_p=top_p or generation_config["top_p"],
+            top_k=top_k or generation_config["top_k"],
+            repetition_penalty=repetition_penalty or generation_config["repetition_penalty"],
             eos_token_id=[self.tokenizer.eos_token_id] + self.tokenizer.additional_special_tokens_ids,
             pad_token_id=self.tokenizer.pad_token_id
         ))
 
         if max_length:
-            generation_configs.pop("max_new_tokens", None)
-            generation_configs["max_length"] = max_length
+            generation_config.pop("max_new_tokens", None)
+            generation_config["max_length"] = max_length
 
         if max_new_tokens:
-            generation_configs.pop("max_length", None)
-            generation_configs["max_new_tokens"] = max_new_tokens
+            generation_config.pop("max_length", None)
+            generation_config["max_new_tokens"] = max_new_tokens
 
         gen_kwargs = dict(
             inputs=input_ids,
-            generation_config=GenerationConfig(**generation_configs),
+            generation_config=GenerationConfig(**generation_config),
             logits_processor=get_logits_processor()
         )
 

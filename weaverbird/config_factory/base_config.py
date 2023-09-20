@@ -5,4 +5,4 @@ from dataclasses import dataclass, asdict
 class BaseConfig:
 
     def dict(self):
-        return {k: str(v) for k, v in asdict(self).items()}
+        return {k: v for k, v in asdict(self).items()}

@@ -6,3 +6,7 @@ numpy>=1.25.0
 sentence-transformers
 gradio>=3.38.3
 langchain>=0.0.266
+google-search-results
+dateparser
+tqdm
+tiktoken
