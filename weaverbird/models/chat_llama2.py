@@ -114,4 +114,4 @@ class ChatLlama2(LLM):
     @property
     def _llm_type(self) -> str:
         """Return type of llm."""
-        return "llama2"
+        return "chat_llama2"
