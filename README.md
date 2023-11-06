@@ -5,6 +5,7 @@
 ![PRs Welcome](https://img.shields.io/badge/PRs-Welcome-green) 
 ![GitHub last commit](https://img.shields.io/github/last-commit/ant-research/fin_domain_llm)
 ![Stars](https://img.shields.io/github/stars/ant-research/fin_domain_llm)
+![Visits Badge](https://visitor-badge.feriirawann.repl.co/?username=iLampard&repo=ant-research/fin_domain_llm&contentType=svg)
 
 <p align="center">📃 <a href="https://arxiv.org/abs/2308.05361" target="_blank">Paper</a> • 🌐 <a href="https://github.com/ant-research/fin_domain_llm/blob/main/README_zh.md" target="_blank">中文 README</a> • 📺 <a href="https://www.youtube.com/watch?v=yofgeqnlrMc" target="_blank">[Demo, version 0.0.1]</a> </p>
          
