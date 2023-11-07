@@ -4,12 +4,13 @@ import time
 from typing import Tuple, Optional, Dict, Any
 
 import torch
+import yaml
 from transformers import HfArgumentParser
 from transformers.generation.logits_process import LogitsProcessor
 from transformers.generation.utils import LogitsProcessorList
 from transformers.modeling_utils import PreTrainedModel
 
-from weaverbird.config_factory import BaseModelConfig, FinetuningConfig, GenerationConfig, WebSearchConfig
+from weaverbird.config_factory import BaseModelConfig, FinetuningConfig, GenerationConfig, RetroConfig
 
 
 def count_parameters(model: torch.nn.Module) -> Tuple[int, int]:
@@ -40,14 +41,31 @@ def parse_configs(configs: Optional[Dict[str, Any]] = None):
         BaseModelConfig,
         FinetuningConfig,
         GenerationConfig,
-        WebSearchConfig
+        RetroConfig
     ))
 
-    parsed_config =  _parse_args(parser, configs)
+    parsed_config = _parse_args(parser, configs)
     return {'model_config': parsed_config[0],
             'finetuning_config': parsed_config[1],
             'generation_config': parsed_config[2],
-            'websearch_config': parsed_config[3]}
+            'retro_config': parsed_config[3]}
+
+
+def load_yaml_config(config_dir):
+    """ Load yaml config file from disk.
+
+    Args:
+        config_dir: str or Path
+            The path of the config file.
+
+    Returns:
+        Config: dict.
+    """
+    with open(config_dir) as config_file:
+        # load configs
+        config = yaml.load(config_file, Loader=yaml.FullLoader)
+
+    return config
 
 
 def _parse_args(parser: HfArgumentParser, args: Optional[Dict[str, Any]] = None) -> Tuple[Any]:
