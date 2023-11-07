@@ -1,11 +1,16 @@
-from typing import Literal, Optional
 from dataclasses import dataclass, field
+from typing import Literal, Optional
 
 from weaverbird.config_factory.base_config import BaseConfig
 
 
 @dataclass
-class WebSearchConfig(BaseConfig):
+class RetroConfig(BaseConfig):
+    retro_name: Optional[Literal["web_searcher_retro", "adaptive_retro"]] = field(
+        default="web_searcher_retro",
+        metadata={"help": "Which retro model cls to initialize."}
+    )
+
     serp_api_token: Optional[bool] = field(
         default=None,
         metadata={"help": "Token for serpapi. See https://serpapi.com/search-api"}
@@ -20,8 +25,3 @@ class WebSearchConfig(BaseConfig):
         default=10,
         metadata={"help": "Number of pages per search"}
     )
-
-
-@dataclass
-class KBConfig(BaseConfig):
-    pass
