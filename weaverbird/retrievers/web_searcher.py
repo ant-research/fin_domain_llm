@@ -6,7 +6,7 @@ from langchain.pydantic_v1 import Field
 from langchain.schema import BaseRetriever, Document
 from langchain.utilities import SerpAPIWrapper
 
-from weaverbird.config_factory import WebSearchConfig
+from weaverbird.config_factory import RetroConfig
 from weaverbird.utils import logger
 
 
@@ -18,8 +18,14 @@ class WebSearcher(BaseRetriever):
 
     web_searcher: SerpAPIWrapper = Field(..., description="Web Search API Wrapper")
 
+    class Config:
+
+        """Configuration for this pydantic object."""
+
+        retro_name = 'web_searcher_retro'
+
     @classmethod
-    def build_from_config(cls, search_config: WebSearchConfig):
+    def build_from_config(cls, search_config: RetroConfig):
         serpapi_api_key = search_config.serp_api_token
         search_config_dict = search_config.dict()
         search_config_dict.pop('serp_api_token')
