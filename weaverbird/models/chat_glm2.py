@@ -5,7 +5,7 @@ from langchain.schema import BaseMessage, ChatResult
 from transformers import PreTrainedModel, PreTrainedTokenizer
 
 from weaverbird.config_factory import BaseModelConfig, FinetuningConfig, GenerationConfig
-from weaverbird.models import load_model_and_tokenizer
+from weaverbird.models.llm_loader import load_model_and_tokenizer
 from weaverbird.utils import dispatch_model
 from weaverbird.utils.misc import torch_gc
 
@@ -29,6 +29,11 @@ class ChatGLM2(LLM):
         self.model = dispatch_model(self.model)
         self.model = self.model.eval()  # enable evaluation mode
         self.generation_config = generation_config
+
+    @classmethod
+    def build_from_config(cls, configs):
+        return cls(model_config=configs['model_config'], finetuning_config=configs['finetuning_config'],
+                   generation_config=configs['generation_config'])
 
     def _call(self, prompt: str, stop: Optional[List[str]] = None, **kwargs: Any) -> str:
         history = kwargs.get('hisotry', [])

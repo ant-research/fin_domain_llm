@@ -2,15 +2,16 @@ from typing import Any, List, Optional, Tuple, Dict
 
 import torch
 from langchain.llms.base import LLM
+from transformers import GenerationConfig
 from transformers import PreTrainedModel, PreTrainedTokenizer
 
 from weaverbird.config_factory import BaseModelConfig, FinetuningConfig
 from weaverbird.config_factory import GenerationConfig as WBGenerationConfig
-from weaverbird.models import load_model_and_tokenizer
+from weaverbird.models.llm_loader import load_model_and_tokenizer
 from weaverbird.models.template import get_template_and_fix_tokenizer, Template
 from weaverbird.utils import dispatch_model, get_logits_processor
 
-from transformers import GenerationConfig
+
 class ChatLlama2(LLM):
     """
     LLAMA2 from Meta
@@ -24,6 +25,7 @@ class ChatLlama2(LLM):
     generation_config: Optional[WBGenerationConfig] = None
 
     template: Optional[Template] = None
+
     def __init__(
             self,
             model_config: BaseModelConfig,
@@ -36,6 +38,11 @@ class ChatLlama2(LLM):
         self.model = self.model.eval()  # enable evaluation mode
         self.generation_config = generation_config
         self.template = get_template_and_fix_tokenizer("llama2", self.tokenizer)
+
+    @classmethod
+    def build_from_config(cls, configs):
+        return cls(model_config=configs['model_config'], finetuning_config=configs['finetuning_config'],
+                   generation_config=configs['generation_config'])
 
     def _call(self, prompt: str, stop: Optional[List[str]] = None, **kwargs: Any) -> str:
         response, _ = self.chat(
