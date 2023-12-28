@@ -32,8 +32,8 @@ WeaverBird is an intelligent dialogue system designed specifically for the finan
 If you find `WeaverBird` useful for your research or development, please cite the following <a href="https://arxiv.org/abs/2308.05361" target="_blank">paper</a>:
 ```
 @article{xue2023weaverbird,
-         title={WeaverBird: Empowering Financial Decision-Making withLarge Language Model, Knowledge Base, and Search Engine},
-         author={Siqiao Xue and Fan Zhou and Yi Xu and Hongyu Zhao and Shuo Xie and Qingyang Dai and Caigao Jiang and James Zhang and Jun Zhou and Dacheng Xiu and Hongyuan Mei},
+         title={WeaverBird: Empowering Financial Decision-Making with Large Language Model, Knowledge Base, and Search Engine},
+         author={Siqiao Xue and Fan Zhou and Yi Xu and Ming Jin and Qingsong Wen and Hongyan Hao and Qingyang Dai and Caigao Jiang and Hongyu Zhao and Shuo Xie and Jianshan He and James Zhang and Hongyuan Mei},
          year={2023},
          eprint={2308.05361},
          archivePrefix={arXiv},
