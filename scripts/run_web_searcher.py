@@ -1,5 +1,6 @@
+from weaverbird.retrievers import BaseRetro
 from weaverbird.utils import parse_configs
-from weaverbird.retrievers import WebSearcher
+
 
 def main():
     search_config = {'model_name_or_path': None,
@@ -7,9 +8,9 @@ def main():
 
     configs = parse_configs(search_config)
 
-    search_config = configs['websearch_config']
+    search_config = configs['retro_config']
 
-    web_searcher_cls = WebSearcher.build_from_config(search_config)
+    web_searcher_cls = BaseRetro.build_from_config(search_config)
 
     results = web_searcher_cls.get_relevant_documents('what does Elon Musk think of BYD')
 
