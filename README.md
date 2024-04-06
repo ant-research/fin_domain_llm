@@ -1,19 +1,20 @@
 ## WeaverBird: Empowering Financial Decision-Making with Large Language Model, Knowledge Base, and Search Engine
 
-![Python 3.9+](https://img.shields.io/badge/python-3.9+-blue.svg)
+![Python 3.8+](https://img.shields.io/badge/python-3.8+-blue.svg)
 ![](https://img.shields.io/badge/license-Apache-000000.svg)
 ![PRs Welcome](https://img.shields.io/badge/PRs-Welcome-green) 
 ![GitHub last commit](https://img.shields.io/github/last-commit/ant-research/fin_domain_llm)
 ![Stars](https://img.shields.io/github/stars/ant-research/fin_domain_llm)
-![Visits Badge](https://visitor-badge.feriirawann.repl.co/?username=iLampard&repo=ant-research/fin_domain_llm&contentType=svg)
-
+<a href="https://huggingface.co/weaverbirdllm" target="_blank">
+    <img alt="Hugging Face" src="https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-WeaverBird-ffc107?color=ffc107&logoColor=white" />
+</a>
 <p align="center">📃 <a href="https://arxiv.org/abs/2308.05361" target="_blank">Paper</a> • 🌐 <a href="https://github.com/ant-research/fin_domain_llm/blob/main/README_zh.md" target="_blank">中文 README</a> • 📺 <a href="https://www.youtube.com/watch?v=yofgeqnlrMc" target="_blank">[Demo, version 0.0.1]</a> </p>
          
 
 WeaverBird is an intelligent dialogue system designed specifically for the finance domain. Our system harnesses a large language model of GPT architecture that has been tuned using extensive corpora of finance-related text.
 
 
-**We are actively updating the repo and will finish within a few days**
+**We are actively updating the repo and will finish shortly**
 
 <span id='top'/>
 
